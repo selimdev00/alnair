@@ -1,0 +1,209 @@
+@import "../config/mixins";
+
+.page {
+  padding: 56px 0 88px;
+
+  &__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--secondary-title-color);
+
+    a {
+      color: var(--secondary-title-color);
+      @include hover;
+    }
+
+    &__current {
+      color: var(--primary-text-color);
+    }
+  }
+
+  &__head {
+    margin-top: 22px;
+    padding-bottom: 12px;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 2.875rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+
+  &__lead {
+    margin-top: 16px;
+    max-width: 64ch;
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+    line-height: 1.55;
+    color: #b6b8c0;
+  }
+
+  &__sections {
+    counter-reset: section;
+    list-style: none;
+    margin-top: 8px;
+  }
+
+  &__section {
+    counter-increment: section;
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    column-gap: 22px;
+    row-gap: 8px;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--border-color);
+
+    &::before {
+      content: counter(section, decimal-leading-zero);
+      grid-row: 1 / span 2;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      line-height: 1.2;
+      @include gradient-text;
+    }
+
+    &__heading {
+      align-self: center;
+      font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    &__body {
+      max-width: 68ch;
+      color: #b6b8c0;
+      line-height: 1.62;
+    }
+  }
+
+  &__cta {
+    margin-top: 44px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+
+    &__title {
+      font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+      font-weight: 700;
+    }
+
+    &__lead {
+      margin-top: 8px;
+      color: #b6b8c0;
+      line-height: 1.5;
+    }
+
+    &__button {
+      flex-shrink: 0;
+      padding: 16px 26px;
+      font-weight: 600;
+      color: var(--primary-text-color);
+      background-color: var(--button-background-color);
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.12s ease;
+
+      &:hover {
+        background-color: var(--button-background-hover);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
+}
+
+.not-found {
+  padding: 60px 0 40px;
+  max-width: 560px;
+
+  &__code {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    font-size: clamp(4rem, 3rem + 6vw, 7rem);
+    line-height: 1;
+    @include gradient-text;
+  }
+
+  &__title {
+    margin-top: 12px;
+    font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.125rem);
+    font-weight: 800;
+  }
+
+  &__lead {
+    margin-top: 14px;
+    color: #b6b8c0;
+    line-height: 1.6;
+  }
+
+  &__actions {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  &__home,
+  &__consult {
+    padding: 14px 24px;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  &__home {
+    color: var(--primary-text-color);
+    background-color: var(--button-background-color);
+    border: 1px solid var(--button-background-color);
+
+    &:hover {
+      background-color: var(--button-background-hover);
+    }
+  }
+
+  &__consult {
+    color: var(--primary-text-color);
+    background-color: transparent;
+    border: 1px solid var(--border-strong-color);
+
+    &:hover {
+      border-color: var(--primary-text-color);
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .page {
+    padding: 36px 0 64px;
+
+    &__cta {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px;
+    }
+
+    &__section {
+      grid-template-columns: 40px 1fr;
+      column-gap: 16px;
+
+      &::before {
+        font-size: 18px;
+      }
+    }
+  }
+}

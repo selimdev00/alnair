@@ -10,12 +10,23 @@ import "aos/dist/aos.css";
 import router from "./router";
 import { RouterProvider } from "react-router-dom";
 
-AOS.init();
+import { ConsultProvider } from "./context/ConsultContext";
+
+AOS.init({
+  once: true,
+  duration: 450,
+  easing: "ease-out-cubic",
+  offset: 40,
+  disable: () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ConsultProvider>
+      <RouterProvider router={router} />
+    </ConsultProvider>
   </React.StrictMode>
 );
 

@@ -29,6 +29,11 @@
 
         &__item {
           @include hover;
+
+          a.is-active {
+            font-weight: 700;
+            @include gradient-text;
+          }
         }
       }
     }
@@ -50,6 +55,15 @@
     }
   }
 
+  &__socials__item {
+    @include hover;
+    display: inline-flex;
+  }
+
+  &__section__address {
+    margin-top: 10px;
+  }
+
   &__bottom {
     display: flex;
     flex-direction: column;
@@ -59,6 +73,10 @@
     font-weight: 400;
     padding: 40px 0 20px 0;
     @include Montserrat;
+
+    &__policy {
+      color: var(--secondary-title-color);
+    }
 
     a {
       text-decoration: underline;

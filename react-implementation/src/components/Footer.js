@@ -1,96 +1,96 @@
-import { useState } from "react";
-
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { address, phoneNumber, socials } from "../data";
 
 import "../styles/components/_footer.scss";
 
-export default function FooterComponent() {
-  const [footerSections] = useState([
-    {
-      title: "О компании",
-      items: [
-        [
-          {
-            title: "Партнёрская программа",
-            link: "/partnership",
-          },
-          {
-            title: "Вакансии",
-            link: "/vacancies",
-          },
-        ],
+const footerSections = [
+  {
+    title: "О компании",
+    items: [
+      [
+        {
+          title: "Партнёрская программа",
+          link: "/partnership",
+        },
+        {
+          title: "Вакансии",
+          link: "/vacancies",
+        },
       ],
-    },
-    {
-      title: "Меню",
-      items: [
-        [
-          {
-            title: "Расчёт стоимости",
-            link: "/calculate",
-          },
-          {
-            title: "Услуги",
-            link: "/services",
-          },
-          {
-            title: "Виджеты",
-            link: "/widgets",
-          },
-          {
-            title: "Интеграции",
-            link: "/integrations",
-          },
-          {
-            title: "Наши клиенты",
-            link: "/clients",
-          },
-        ],
-        [
-          {
-            title: "Кейсы",
-            link: "/cases",
-          },
-          {
-            title: "Благодарственные письма",
-            link: "/news",
-          },
-          {
-            title: "Сертификаты",
-            link: "/certificates",
-          },
-          {
-            title: "Блог на Youtube",
-            link: "/blog",
-          },
-          {
-            title: "Вопрос / Ответ",
-            link: "/questions",
-          },
-        ],
+    ],
+  },
+  {
+    title: "Меню",
+    items: [
+      [
+        {
+          title: "Расчёт стоимости",
+          link: "/calculate",
+        },
+        {
+          title: "Услуги",
+          link: "/services",
+        },
+        {
+          title: "Виджеты",
+          link: "/widgets",
+        },
+        {
+          title: "Интеграции",
+          link: "/integrations",
+        },
+        {
+          title: "Наши клиенты",
+          link: "/clients",
+        },
       ],
-    },
-  ]);
+      [
+        {
+          title: "Кейсы",
+          link: "/cases",
+        },
+        {
+          title: "Благодарственные письма",
+          link: "/news",
+        },
+        {
+          title: "Сертификаты",
+          link: "/certificates",
+        },
+        {
+          title: "Блог на Youtube",
+          link: "/blog",
+        },
+        {
+          title: "Вопрос / Ответ",
+          link: "/questions",
+        },
+      ],
+    ],
+  },
+];
 
+export default function FooterComponent() {
   return (
-    <div
+    <footer
+      id="contacts"
       className="footer__wrapper"
-      data-aos="fade-up"
-      data-aos-delay="2000"
-      data-aos-duration="1000"
+      data-aos="fade"
     >
       <div className="container">
         <div className="footer">
           {footerSections.map((section) => (
             <div key={section.title} className="footer__section">
               <h3 className="footer__section__title">{section.title}</h3>
-              <nav className="footer__section__items__wrapper">
+              <nav
+                className="footer__section__items__wrapper"
+                aria-label={section.title}
+              >
                 <ul className="footer__section__items">
-                  {section.items.map((items, index) => (
+                  {section.items.map((items) => (
                     <div
-                      key={`section-${index}`}
+                      key={items[0].title}
                       className="footer__section__items__block"
                     >
                       {items.map((item) => (
@@ -98,7 +98,14 @@ export default function FooterComponent() {
                           key={item.title}
                           className="footer__section__items__block__item"
                         >
-                          <Link to={item.link}>{item.title}</Link>
+                          <NavLink
+                            to={item.link}
+                            className={({ isActive }) =>
+                              isActive ? "is-active" : undefined
+                            }
+                          >
+                            {item.title}
+                          </NavLink>
                         </li>
                       ))}
                     </div>
@@ -116,32 +123,31 @@ export default function FooterComponent() {
             </p>
 
             <div className="footer__socials">
-              {socials.map((item, index) => (
+              {socials.map((item) => (
                 <a
-                  key={index}
-                  className="header__socials__item"
+                  key={item.link}
+                  className="footer__socials__item"
                   target="_blank"
                   href={item.link}
                   rel="noreferrer"
+                  aria-label={item.name}
                 >
                   <img src={item.icon} alt="" />
                 </a>
               ))}
             </div>
 
-            <p className="footer__section">{address}</p>
+            <p className="footer__section__address">{address}</p>
           </div>
         </div>
       </div>
 
       <div className="container">
         <div className="footer__bottom">
-          <p>©WELBEX 2022. Все права защищены.</p>
-          <p>
-            <Link to="">Политика конфиденциальности</Link>
-          </p>
+          <p>©WELBEX {new Date().getFullYear()}. Все права защищены.</p>
+          <p className="footer__bottom__policy">Политика конфиденциальности</p>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

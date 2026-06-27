@@ -1,5 +1,5 @@
 import DefaultLayout from "../layouts/default.js";
-import { useState } from "react";
+import { useConsult } from "../context/ConsultContext";
 
 import "../styles/views/_home.scss";
 
@@ -9,49 +9,35 @@ import purpleBall from "../images/particles/purple_ball.png";
 import redBall from "../images/particles/red_ball.png";
 import smallRedBall from "../images/particles/red_ball_small.png";
 
+const services = [
+  {
+    title: "Виджеты",
+    description: "30 готовых решений",
+  },
+  {
+    title: "Dashboard",
+    description: "с показателями вашего бизнеса",
+  },
+  {
+    title: "Skype Аудит",
+    description: "отдела продаж и CRM системы",
+  },
+  {
+    title: "35 дней",
+    description: "использования CRM",
+  },
+];
+
+const particles = [
+  { id: "red-light", image: redLight },
+  { id: "purple-light", image: purpleLight },
+  { id: "purple-ball", image: purpleBall },
+  { id: "small-red-ball", image: smallRedBall },
+  { id: "red-ball", image: redBall },
+];
+
 export default function Home() {
-  const [services] = useState([
-    {
-      title: "Виджеты",
-      description: "30 готовых решений",
-    },
-    {
-      title: "Dashboard",
-      description: "с показателями вашего бизнеса",
-    },
-    {
-      title: "Skype Аудит",
-      description: "отдела продаж и CRM системы",
-    },
-    {
-      title: "35 дней",
-      description: "использования CRM",
-    },
-  ]);
-
-  const particles = [
-    {
-      id: "red-light",
-      image: redLight,
-    },
-    {
-      id: "purple-light",
-      image: purpleLight,
-    },
-    {
-      id: "purple-ball",
-      image: purpleBall,
-    },
-
-    {
-      id: "small-red-ball",
-      image: smallRedBall,
-    },
-    {
-      id: "red-ball",
-      image: redBall,
-    },
-  ];
+  const { open } = useConsult();
 
   return (
     <DefaultLayout>
@@ -60,8 +46,9 @@ export default function Home() {
           key={item.id}
           id={item.id}
           className="particle"
-          data-aos="fade-up"
-          data-aos-delay={index * 250}
+          aria-hidden="true"
+          data-aos="fade"
+          data-aos-delay={index * 60}
         >
           <img src={item.image} alt="" />
         </div>
@@ -69,12 +56,7 @@ export default function Home() {
 
       <div className="home__wrapper">
         <div className="container">
-          <div
-            className="home"
-            data-aos="fade-up"
-            data-aos-delay="1600"
-            data-aos-duration="1000"
-          >
+          <div className="home" data-aos="fade" data-aos-delay="120">
             <div className="home__welcome-text">
               <h1 className="home__welcome-text__title">
                 <p>Зарабатывайте больше</p>
@@ -86,7 +68,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="home__services">
+            <div className="home__services" id="services">
               <div className="home__services__description">
                 Вместе с <span>бесплатной консультацией</span> мы дарим:
               </div>
@@ -107,7 +89,11 @@ export default function Home() {
                 ))}
               </div>
 
-              <button className="home__services__button">
+              <button
+                type="button"
+                className="home__services__button"
+                onClick={open}
+              >
                 Получить консультацию
               </button>
             </div>

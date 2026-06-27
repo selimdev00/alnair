@@ -17,6 +17,38 @@ body {
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--primary-text-color);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  padding: 10px 16px;
+  background-color: var(--button-background-color);
+  color: var(--primary-text-color);
+  border-radius: 0 0 6px 0;
+
+  &:focus {
+    left: 0;
+  }
+}
+
 .container {
   max-width: 1160px;
   padding: 0 10px;
@@ -43,5 +75,13 @@ body {
 
   footer {
     grid-area: footer;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-wrapper {
+    // Drop the 100vh sticky-footer stretch on small screens so a short hero
+    // does not leave a large empty band above the footer.
+    min-height: auto;
   }
 }

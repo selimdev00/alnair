@@ -1,0 +1,573 @@
+@import "../config/mixins";
+
+$muted: #b6b8c0;
+
+.page__body {
+  margin-top: 4px;
+}
+
+/* shared numeral font */
+%numeral {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ---- services: editorial alternating rows ---- */
+.pl-rows {
+  list-style: none;
+
+  &__row {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    column-gap: 24px;
+    row-gap: 10px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  &__index {
+    @extend %numeral;
+    grid-row: 1 / span 2;
+    font-size: 24px;
+    @include gradient-text;
+  }
+
+  &__heading {
+    align-self: center;
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+    font-weight: 700;
+  }
+
+  &__body {
+    max-width: 70ch;
+    color: $muted;
+    line-height: 1.62;
+  }
+}
+
+/* ---- widgets: three-column chip cards ---- */
+.pl-grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+
+  &__card {
+    padding: 26px 24px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+  }
+
+  &__chip {
+    @extend %numeral;
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: #0e1014;
+    border-radius: 999px;
+    @include gradient;
+  }
+
+  &__heading {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  &__body {
+    margin-top: 10px;
+    color: $muted;
+    line-height: 1.58;
+  }
+}
+
+/* ---- integrations: two-column dotted list ---- */
+.pl-dots {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 40px;
+
+  &__item {
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    column-gap: 16px;
+  }
+
+  &__dot {
+    margin-top: 8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    @include gradient;
+  }
+
+  &__heading {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  &__body {
+    margin-top: 8px;
+    color: $muted;
+    line-height: 1.58;
+  }
+}
+
+/* ---- cases: result cards with oversized numerals ---- */
+.pl-cases {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  &__card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 28px;
+    align-items: start;
+    padding: 30px 32px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+  }
+
+  &__num {
+    @extend %numeral;
+    font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    @include gradient-text;
+  }
+
+  &__heading {
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+    font-weight: 700;
+  }
+
+  &__body {
+    margin-top: 12px;
+    max-width: 80ch;
+    color: $muted;
+    line-height: 1.62;
+  }
+}
+
+/* ---- certificates: badge grid ---- */
+.pl-badges {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+
+  &__card {
+    padding: 28px 26px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+  }
+
+  &__mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 18px;
+    font-size: 22px;
+    color: #0e1014;
+    border-radius: 50%;
+    @include gradient;
+  }
+
+  &__heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  &__body {
+    margin-top: 10px;
+    color: $muted;
+    line-height: 1.58;
+  }
+}
+
+/* ---- partnership: vertical stepper ---- */
+.pl-steps {
+  list-style: none;
+
+  &__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    column-gap: 22px;
+    padding-bottom: 32px;
+
+    &:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      left: 23px;
+      top: 52px;
+      bottom: 4px;
+      width: 1px;
+      background-color: var(--border-color);
+    }
+  }
+
+  &__node {
+    @extend %numeral;
+    z-index: 1;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #0e1014;
+    border-radius: 50%;
+    @include gradient;
+  }
+
+  &__content {
+    padding-top: 9px;
+  }
+
+  &__heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  &__body {
+    margin-top: 10px;
+    max-width: 72ch;
+    color: $muted;
+    line-height: 1.6;
+  }
+}
+
+/* ---- vacancies: job rows with action ---- */
+.pl-jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 26px 28px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+  }
+
+  &__heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  &__body {
+    margin-top: 8px;
+    max-width: 70ch;
+    color: $muted;
+    line-height: 1.58;
+  }
+
+  &__apply {
+    flex-shrink: 0;
+    padding: 12px 22px;
+    font-weight: 600;
+    color: var(--primary-text-color);
+    background-color: var(--button-background-color);
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--button-background-hover);
+    }
+  }
+}
+
+/* ---- calculate: blocks, first highlighted ---- */
+.pl-calc {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+
+  &__block {
+    padding: 28px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    &--lead {
+      grid-column: 1 / -1;
+      background-color: var(--surface-raised-color);
+      border-color: var(--border-strong-color);
+    }
+  }
+
+  &__heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  &__body {
+    margin-top: 12px;
+    color: $muted;
+    line-height: 1.6;
+  }
+}
+
+/* ---- clients: segment tiles ---- */
+.pl-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+
+  &__tile {
+    padding: 30px 28px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.25s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong-color);
+    }
+  }
+
+  &__heading {
+    font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.45rem);
+    font-weight: 700;
+  }
+
+  &__body {
+    margin-top: 12px;
+    color: $muted;
+    line-height: 1.6;
+  }
+}
+
+/* ---- news: testimonial quotes ---- */
+.pl-quotes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+
+  &__card {
+    position: relative;
+    margin: 0;
+    padding: 28px 28px 26px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+  }
+
+  &__mark {
+    @extend %numeral;
+    display: block;
+    height: 28px;
+    font-size: 56px;
+    line-height: 1;
+    @include gradient-text;
+  }
+
+  &__body {
+    margin: 8px 0 0;
+    color: var(--primary-text-color);
+    line-height: 1.6;
+  }
+
+  &__caption {
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--secondary-title-color);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* ---- blog: video cards ---- */
+.pl-videos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  &__card {
+    overflow: hidden;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+  }
+
+  &__thumb {
+    position: relative;
+    aspect-ratio: 16 / 7;
+    @include gradient;
+  }
+
+  &__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background-color: rgba(14, 16, 20, 0.78);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 54%;
+      transform: translate(-50%, -50%);
+      border-style: solid;
+      border-width: 9px 0 9px 15px;
+      border-color: transparent transparent transparent
+        var(--primary-text-color);
+    }
+  }
+
+  &__meta {
+    padding: 22px 24px 24px;
+  }
+
+  &__heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  &__body {
+    margin-top: 10px;
+    color: $muted;
+    line-height: 1.58;
+  }
+}
+
+/* ---- questions: accordion ---- */
+.pl-faq {
+  &__item {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  &__q {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  &__trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 4px;
+    font-family: inherit;
+    font-size: clamp(1rem, 0.95rem + 0.4vw, 1.2rem);
+    font-weight: 600;
+    text-align: left;
+    color: var(--primary-text-color);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  &__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      @include gradient;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    &::before {
+      left: 0;
+      top: 8px;
+      width: 18px;
+      height: 2px;
+    }
+
+    &::after {
+      left: 8px;
+      top: 0;
+      width: 2px;
+      height: 18px;
+    }
+  }
+
+  &__item--open &__icon::after {
+    transform: scaleY(0);
+  }
+
+  &__answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.25s ease, padding 0.25s ease;
+
+    p {
+      max-width: 78ch;
+      color: $muted;
+      line-height: 1.62;
+    }
+  }
+
+  &__item--open &__answer {
+    max-height: 360px;
+    opacity: 1;
+    padding-bottom: 22px;
+  }
+}
+
+@media (max-width: 860px) {
+  .pl-grid3,
+  .pl-dots,
+  .pl-badges,
+  .pl-calc,
+  .pl-tiles,
+  .pl-quotes,
+  .pl-videos {
+    grid-template-columns: 1fr;
+  }
+
+  .pl-calc__block--lead {
+    grid-column: auto;
+  }
+
+  .pl-cases__card {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+    padding: 24px;
+  }
+
+  .pl-jobs__row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px;
+  }
+
+  .pl-jobs__apply {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-tiles__tile,
+  .pl-faq__answer,
+  .pl-faq__icon::before,
+  .pl-faq__icon::after {
+    transition: none;
+  }
+}

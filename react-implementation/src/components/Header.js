@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import logo from "../images/logo_welbex.svg";
 
@@ -7,53 +6,59 @@ import { socials, phoneNumber } from "../data";
 
 import "../styles/components/_header.scss";
 
-export default function HeaderComponent() {
-  const [headerNavItems] = useState([
-    {
-      title: "Услуги",
-      link: "/services",
-    },
-    {
-      title: "Виджеты",
-      link: "/services",
-    },
-    {
-      title: "Интеграции",
-      link: "/services",
-    },
-    {
-      title: "Кейсы",
-      link: "/services",
-    },
-    {
-      title: "Сертификаты",
-      link: "/services",
-    },
-  ]);
+const headerNavItems = [
+  {
+    title: "Услуги",
+    link: "/services",
+  },
+  {
+    title: "Виджеты",
+    link: "/widgets",
+  },
+  {
+    title: "Интеграции",
+    link: "/integrations",
+  },
+  {
+    title: "Кейсы",
+    link: "/cases",
+  },
+  {
+    title: "Сертификаты",
+    link: "/certificates",
+  },
+];
 
+export default function HeaderComponent() {
   return (
-    <div
+    <header
       className="header__wrapper"
-      data-aos="fade-up"
-      data-aos-delay="1400"
-      data-aos-duration="750"
+      data-aos="fade"
+      data-aos-delay="0"
     >
       <div className="container">
         <div className="header">
-          <Link to="/">
+          <Link to="/" aria-label="WELBEX — на главную">
             <div className="header__logo">
-              <img src={logo} alt="" />
+              <img src={logo} alt="WELBEX" />
 
               <p className="header__logo__text">
                 крупный интегратор CRM в Росcии и ещё 8 странах
               </p>
             </div>
           </Link>
-          <nav className="header__nav__wrapper">
+          <nav className="header__nav__wrapper" aria-label="Основная навигация">
             <ul className="header__nav">
-              {headerNavItems.map((item, index) => (
-                <li key={index} className="header__nav__item">
-                  <Link to={item.link}>{item.title}</Link>
+              {headerNavItems.map((item) => (
+                <li key={item.title} className="header__nav__item">
+                  <NavLink
+                    to={item.link}
+                    className={({ isActive }) =>
+                      isActive ? "is-active" : undefined
+                    }
+                  >
+                    {item.title}
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -64,13 +69,14 @@ export default function HeaderComponent() {
             </p>
           </div>
           <div className="header__socials">
-            {socials.map((item, index) => (
+            {socials.map((item) => (
               <a
-                key={index}
+                key={item.link}
                 className="header__socials__item"
                 target="_blank"
                 href={item.link}
                 rel="noreferrer"
+                aria-label={item.name}
               >
                 <img src={item.icon} alt="" />
               </a>
@@ -78,6 +84,6 @@ export default function HeaderComponent() {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
